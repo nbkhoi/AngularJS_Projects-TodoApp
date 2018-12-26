@@ -1,0 +1,13 @@
+doctype html
+html(ng-app='TodoApp')
+    head
+        title 'Todo App'
+        link(rel="stylesheet", href="css/main.css")
+    body(ng-controller='TodoAppController')
+        input.input-form(type='text', ng-model='newTask', placeholder='Add things to do')
+        button.btn(type='submit', ng-click='addTask(newTask)') Submit
+        ul
+            li(ng-repeat='task in tasksTodo') {{task}}
+        script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js')
+        script(src='./js/main.js')
+        
