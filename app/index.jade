@@ -1,5 +1,5 @@
 doctype html
-html(ng-app='TodoApp')
+html(lang='en' ng-app='TodoApp')
     head
         title 'Todo App'
         link(rel="stylesheet", href="css/main.css")
@@ -9,5 +9,4 @@ html(ng-app='TodoApp')
         ul
             li(ng-repeat='task in tasksTodo') {{task}}
         script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js')
-        script(src='./js/main.js')
-        
+        script(src='js/main.js')
