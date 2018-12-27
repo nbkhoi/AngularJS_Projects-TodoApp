@@ -1,4 +1,4 @@
-angular.module('TodoApp', ['ui.bootstrap'])
+angular.module('TodoApp',[])
 .controller 'TodoAppController', ['$scope', ($scope) ->
     $scope.tasksTodo = ['task 1', 'task 2']
     $scope.error = false
