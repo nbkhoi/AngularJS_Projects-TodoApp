@@ -4,6 +4,15 @@ var gulp = require('gulp'),
     clean = require('gulp-clean'),
     connect = require('gulp-connect'),
     paths = {
+        dist: {
+            path: "./dist/",
+            js: {
+                path: "./dist/js/"
+            },
+            css: {
+                path: "./dist/css/"
+            }
+        },
         public: {
             path: "./public/",
             js: {
@@ -12,45 +21,54 @@ var gulp = require('gulp'),
             css: {
                 path: "./public/css/"
             }
+        },
+        src: {
+            path: "./src/",
+            js: {
+                path: "./src/js/"
+            },
+            sass: {
+                path: "./src/sass/"
+            }
         }
     };
 // create a TASK to compile Jade to HTML using gulp-jade
 gulp.task('html', function (done) {
-    gulp.src(['./src/**/*.jade'])
+    gulp.src([paths.src.path + '**/*.jade'])
         .pipe($.jade({ pretty: true, doctype: 'html' }))
         .on('error', $.util.log)
-        .pipe(gulp.dest('./public/'));
+        .pipe(gulp.dest(paths.public.path));
     done();
 });
 
 // create a TASK to compile CoffeeScript to JavaScript using gulp-coffee
 gulp.task('js', function (done) {
-    gulp.src(['./src/**/*.coffee'])
+    gulp.src([paths.src.js.path + '**/*.coffee'])
         .pipe($.coffee({ bare: true }))
         .on('error', $.util.log)
-        .pipe(gulp.dest('./public/'));
+        .pipe(gulp.dest(paths.public.js.path));
     done();
 });
 
 // create a TASK to compile Sass into CSS using gulp-sass
 gulp.task('css', function (done) {
-    gulp.src(['./src/**/*.scss'])
+    gulp.src([paths.src.sass.path + '**/*.sass'])
         .pipe($.sass({ style: 'expanded' }))
-        .pipe(gulp.dest('./public/'));
+        .pipe(gulp.dest(paths.public.css.path));
     done();
 });
 
 // create a TASK to WATCH for changes in your files
 // this will "watch" for any changes in your files and rerun gulp if necessary
 gulp.task('watch', function (done) {
-    gulp.watch(['./src/**/*.jade'], gulp.series('html'));
-    gulp.watch(['./src/**/*.coffee'], gulp.series('js'));
-    gulp.watch(['./src/**/*.scss'], gulp.series('css'));
+    gulp.watch([paths.src.path + '**/*.jade'], gulp.series('html'));
+    gulp.watch([paths.src.js.path + '**/*.coffee'], gulp.series('js'));
+    gulp.watch([paths.src.sass.path + '**/*.sass'], gulp.series('css'));
     done();
 });
 
 gulp.task('clean', function(done) {
-    gulp.src(['./public/**/*.css', './public/**/*.js', './public/**/*.html'], {read: false})
+    gulp.src([paths.public.css.path + '**/*.css', paths.public.js.path + '**/*.js', paths.public.path + '**/*.html'], {read: false})
         .pipe(clean());
     done();
 });
